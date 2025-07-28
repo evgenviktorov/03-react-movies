@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
-import Loader from '../Loader/Loader'
 import { fetchMovies } from '../../services/movieService'
 import type { Movie } from '../../types/movie'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import Loader from '../Loader/Loader'
 import MovieGrid from '../MovieGrid/MovieGrid'
-import SearchBar from '../SearchBar/SearchBar'
 import MovieModal from '../MovieModal/MovieModal'
+import SearchBar from '../SearchBar/SearchBar'
 import css from './App.module.css'
 
 export default function App() {
@@ -38,8 +38,6 @@ export default function App() {
 		}
 	}
 
-	const closeModal = () => setSelectedMovie(null)
-
 	return (
 		<div className={css.app}>
 			<Toaster position='top-right' />
@@ -52,12 +50,8 @@ export default function App() {
 			)}
 			{selectedMovie && (
 				<MovieModal
-					onClose={closeModal}
-					backdropPath={selectedMovie.backdrop_path}
-					title={selectedMovie.title}
-					overview={selectedMovie.overview}
-					releaseDate={selectedMovie.release_date}
-					voteAverage={selectedMovie.vote_average}
+					movie={selectedMovie}
+					onClose={() => setSelectedMovie(null)}
 				/>
 			)}
 		</div>
